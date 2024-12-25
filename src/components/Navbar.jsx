@@ -10,6 +10,11 @@ const Navbar = () => {
       >
         <p className="blue-gradient_text">XC</p>
       </NavLink>
+      <nav className="flex text-lg gap-7 font-medium">
+        <NavLink to="/about">
+          About
+        </NavLink>
+      </nav>
     </header>
   );
 };
