@@ -11,12 +11,12 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { a } from "@react-spring/three";
 
-import IslandScene from "../assets/3D/Island.glb";
+import islandScene from "../assets/3D/Island.glb";
 
 const Island = (props) => {
   const islandRef = useRef();
 
-  const { nodes, materials } = useGLTF("/island.glb");
+  const { nodes, materials } = useGLTF(islandScene);
   return (
     <a.group ref={islandRef} {...props}>
       <mesh
