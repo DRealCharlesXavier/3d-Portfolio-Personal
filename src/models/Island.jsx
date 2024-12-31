@@ -23,6 +23,22 @@ const Island = ({ isRotating, setIsRotating, ...props }) => {
   const rotationSpeed = useRef(0);
   const dampingFactor = 0.95;
 
+  const handlePointerDown = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsRotating(true);
+  };
+  const handlePointerDown = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsRotating(true);
+  };
+  const handlePointerDown = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsRotating(true);
+  };
+
   return (
     <a.group ref={islandRef} {...props}>
       <mesh
