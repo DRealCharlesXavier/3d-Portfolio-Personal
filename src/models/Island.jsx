@@ -43,14 +43,30 @@ const Island = ({ isRotating, setIsRotating, ...props }) => {
     const delta = (clientX - lastX.current) / viewport.width;
 
     islandRef.current.rotation.y += delta * 0.01 * Math.PI;
+
     lastX.current = clientX;
+
     rotationSpeed.current = delta * 0.01 * Math.PI;
   };
 
   const handlePointerMove = (e) => {
     e.stopPropagation();
     e.preventDefault();
+
+    if (isRotating) handlePointerUp(e);
   };
+
+  useEffect(() => {
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("pointerup", handlePointerUp);
+    document.addEventListener("pointermover", handlePointerMove);
+
+    return () => {
+      document.removeEventListener("poinetrdown", handlePointerDown);
+      document.removeEventListener("poinetrup", handlePointerUp);
+      document.removeEventListener("poinetrMove", handlePointerMove);
+    };
+  }, [gl, handlePointerDown, handlePointerUp, handlePointerDown]);
 
   return (
     <a.group ref={islandRef} {...props}>
