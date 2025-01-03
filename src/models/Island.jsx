@@ -66,6 +66,12 @@ const Island = ({ isRotating, setIsRotating, ...props }) => {
     }
   };
 
+  const handleKeyUp = (e) => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      setIsRotating(false)
+    }
+  }
+
   useEffect(() => {
     document.addEventListener("pointerdown", handlePointerDown);
     document.addEventListener("pointerup", handlePointerUp);
