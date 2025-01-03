@@ -67,20 +67,24 @@ const Island = ({ isRotating, setIsRotating, ...props }) => {
   };
 
   const handleKeyUp = (e) => {
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-      setIsRotating(false)
+    if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+      setIsRotating(false);
     }
-  }
+  };
 
   useEffect(() => {
     document.addEventListener("pointerdown", handlePointerDown);
     document.addEventListener("pointerup", handlePointerUp);
     document.addEventListener("pointermover", handlePointerMove);
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
 
     return () => {
       document.removeEventListener("poinetrdown", handlePointerDown);
       document.removeEventListener("poinetrup", handlePointerUp);
       document.removeEventListener("poinetrMove", handlePointerMove);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
     };
   }, [gl, handlePointerDown, handlePointerUp, handlePointerDown]);
 
