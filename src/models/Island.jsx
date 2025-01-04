@@ -77,12 +77,12 @@ const Island = ({ isRotating, setIsRotating, ...props }) => {
       rotationSpeed.current *= dampingFactor;
 
       if (Math.abs(rotationSpeed.current) < 0.001) {
-        rotationSpeed.current = 0
+        rotationSpeed.current = 0;
       }
     } else {
       const rotation = islandRef.current.rotation.y;
 
-        /**
+      /**
        * Normalize the rotation value to ensure it stays within the range [0, 2 * Math.PI].
        * The goal is to ensure that the rotation value remains within a specific range to
        * prevent potential issues with very large or negative rotation values.
@@ -119,20 +119,21 @@ const Island = ({ isRotating, setIsRotating, ...props }) => {
           setCurrentStage(null);
       }
     }
-  })
+  });
 
   useEffect(() => {
-    document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("pointerup", handlePointerUp);
-    document.addEventListener("pointermover", handlePointerMove);
+    const canvas = gl.domElement;
+    canvas.addEventListener("pointerdown", handlePointerDown);
+    canvas.addEventListener("pointerup", handlePointerUp);
+    canvas.addEventListener("pointermover", handlePointerMove);
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
 
     return () => {
-      document.removeEventListener("poinetrdown", handlePointerDown);
-      document.removeEventListener("poinetrup", handlePointerUp);
-      document.removeEventListener("poinetrMove", handlePointerMove);
-      document.removeEventListener("keydown", handleKeyDown);
+      canvas.removeEventListener("poinetrdown", handlePointerDown);
+      canvas.removeEventListener("poinetrup", handlePointerUp);
+      canvas.removeEventListener("poinetrMove", handlePointerMove);
+      canvas.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
     };
   }, [gl, handlePointerDown, handlePointerUp, handlePointerDown]);
