@@ -35,8 +35,12 @@ const Island = ({ isRotating, setIsRotating, ...props }) => {
   const handlePointerUp = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    setIsRotating(false);
-  };
+   setIsRotating(false);
+
+   if(isRotating) handlePointerMove(e)
+   
+ };
+ 
   const handlePointerMove = (e) => {
     e.stopPropagation();
     e.preventDefault();
