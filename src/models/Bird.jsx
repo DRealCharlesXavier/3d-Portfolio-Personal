@@ -14,6 +14,10 @@ const Bird = () => {
     actions['Take 001'].play()
   }, []);
 
+  useFrame((_, delta) => {
+    birdRef.current.rotation.x += 0.15 * delta
+  })
+
   return (
     <mesh position={[-5, 2, 1]} scale={[0.003, 0.003, 0.003]} ref={birdRef}>
       <primitive object={scene} />
