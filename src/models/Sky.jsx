@@ -12,7 +12,7 @@ const Sky = ({ isRotating }) => {
     if (isRotating) {
       skyRef.current.rotation.y += 0.25 * delta;
     }
-  }); 
+  });
 
   return (
     <mesh ref={skyRef}>

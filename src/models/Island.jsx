@@ -45,7 +45,6 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
     if (isRotating) {
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
 
-
       const delta = (clientX - lastX.current) / viewport.width;
 
       islandRef.current.rotation.y += delta * 0.01 * Math.PI;
@@ -69,8 +68,6 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
       setIsRotating(false);
     }
   };
-
-  
 
   useEffect(() => {
     console.log({ isRotating });
@@ -101,7 +98,6 @@ const Island = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
 
       islandRef.current.rotation.y += rotationSpeed.current;
     } else {
-      // When rotating, determine the current stage based on island's orientation
       const rotation = islandRef.current.rotation.y;
 
       /**
