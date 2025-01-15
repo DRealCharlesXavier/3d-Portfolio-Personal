@@ -14,8 +14,9 @@ const Bird = () => {
     actions['Take 001'].play()
   }, []);
 
-  useFrame((_, delta) => {
-    birdRef.current.rotation.x += 0.15 * delta
+  useFrame(({ clock, camera }) => {
+    // Update the Y position simulate the flight moving in a sin wave
+    birdRef.current.position.y = Math.sin(clock.elapsedTime) * 0.2 + 2
   })
 
   return (
