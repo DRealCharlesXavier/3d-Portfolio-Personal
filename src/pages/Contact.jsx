@@ -24,7 +24,15 @@ const Contact = () => {
         message: form.message
       },
       import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-    );
+    ).then(() => {
+      setIsLoading(false);
+      // TODO: Show success message
+      // TODO: Hide an alert
+    }).catch((error) => {
+      setIsLoading(false);
+      console.log(error);
+      // TODO: Show error message
+    })
   }
   const handleFocus = () => {};
   const handleBlur = () => { };
