@@ -1,22 +1,45 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import emailjs from '@emailjs/browser'
 
 const Contact = () => {
+  const formRef = useRef(null);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsLoading(true)
+
+    emailjs.sendForm(
+      import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+      {
+        from_name: form.name,
+        to_name: "Xavier",
+        from_email: form.email,
+        to_email: "drealcharlesxavier@proton.me",
+        message: form.message
+      },
+      import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
+    );
+  }
   const handleFocus = () => {};
-  const handleBlur = () => {};
+  const handleBlur = () => { };
 
   return (
     <section className="relative flex lg:flex-row flex-col max-container">
       <div className="flex-1 min-w-[50%] flex flex-col">
         <h1 className="head-text">Get in Touch</h1>
 
-        <form className="w-full flex flex-col gap-7mt-14">
+        <form className="w-full flex flex-col gap-7mt-14"
+        onSubmit={handleSubmit}
+        >
           <label className="text-black-500 font-semibold">
             Name
-            <input
+            <input 
               type="text"
               name="name"
               className="input"
@@ -31,8 +54,8 @@ const Contact = () => {
           <label className="text-black-500 font-semibold">
             Email
             <input
-              type="Email"
-              name="Email"
+              type="email"
+              name="email"
               className="input"
               placeholder="John@gmail.com"
               required
@@ -62,7 +85,9 @@ const Contact = () => {
             disabled={isLoading}
             onFocus={handleFocus}
             onBlur={handleBlur}
-          ></button>
+          >
+            {isLoading ? "Sending..." : "Send Message"}
+          </button>
         </form>
       </div>
     </section>
