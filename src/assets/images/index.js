@@ -1,15 +1,6 @@
-import hero from './hero.jpg'
-import meta from './meta.png'
-import shopify from './shopify.png'
-import starbucks from './starbucks.png'
-import tesla from './tesla.png'
-import logo from './logo.svg'
+import firstbank from "./firstbank.jpg";
+import hensmor from "./hensmor.jpg";
+import newhorizons from "./newhorizons.jpg";
+import wilson from "./wilson.jpg";
 
-export {
-    hero,
-    meta,
-    shopify,
-    starbucks,
-    tesla,
-    logo
-}
+export { firstbank, hensmor, newhorizons, wilson };
