@@ -13,7 +13,7 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState("idle");
 
-  const { alert, showAlert, hideAlert } = useAlert()
+  const { alert, showAlert, hideAlert } = useAlert();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -38,10 +38,14 @@ const Contact = () => {
       )
       .then(() => {
         setIsLoading(false);
-        showAlert({ show: true, text: 'Message sent successfully!', type: 'success' })
+        showAlert({
+          show: true,
+          text: "Message sent successfully!",
+          type: "success",
+        });
 
         setTimeout(() => {
-          hideAlert()
+          hideAlert();
           setCurrentAnimation("idle");
           setForm({ name: "", email: "", message: "" });
         }, [3000]);
@@ -62,7 +66,7 @@ const Contact = () => {
   const handleBlur = () => setCurrentAnimation("idle");
 
   return (
-    <section className="relative flex lg:flex-row flex-col max-container">
+    <section className="relative flex lg:flex-row flex-col max-container h-[100vh]">
       {alert.show && <Alert {...alert} />}
 
       <div className="flex-1 min-w-[50%] flex flex-col">

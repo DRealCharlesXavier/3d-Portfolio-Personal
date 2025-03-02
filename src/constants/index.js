@@ -155,7 +155,7 @@ export const experiences = [
     company_name: "First Bank of Nigeria",
     icon: firstbank,
     iconBg: "#f0f257",
-    date: "Nov 2023 - Present",
+    date: "Nov 2023 - Present", 
     points: [
       " Streamline communication between various teams, including Security Operations and Financial Services, ensuring smooth collaboration and operational efficiency.",
       "Facilitate software solutions for Microsoft Outlook, enhancing internal workflows and expediting the dissemination of information across departments.",
