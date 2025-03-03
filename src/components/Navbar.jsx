@@ -19,7 +19,9 @@ const Navbar = () => {
     <header className="header">
       <NavLink
         to="/"
-        className="w-10 h-10 rounded-lg bg-white items-center justify-center flex font-bold shadow-md"
+        className={`w-10 h-10 rounded-lg items-center justify-center flex font-bold shadow-md ${
+          useColorMode === "light" ? "bg-white" : "bg-gray-800"
+        }`}
       >
         <p className="blue-gradient_text">XC</p>
       </NavLink>
