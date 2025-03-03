@@ -1,8 +1,20 @@
+"use client"
 import React from "react";
 
-import { NavLink } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
+
+import {
+  ColorModeButton,
+  DarkMode,
+  LightMode,
+  useColorMode,
+  useColorModeValue,
+} from "@/components/ui/color-mode";
 
 const Navbar = () => {
+  const { toggleColorMode } = useColorMode();
+  const bg = useColorModeValue("gray.600", "gray.300");
+
   return (
     <header className="header">
       <NavLink
