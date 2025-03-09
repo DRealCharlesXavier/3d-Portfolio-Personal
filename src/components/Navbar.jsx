@@ -1,5 +1,9 @@
-"use client"
+"use client";
 import React from "react";
+
+import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react";
+import { useColorMode } from "@/components/ui/color-mode";
+import { LuMoon, LuSun } from "react-icons/lu";
 
 import { NavLink, Link, useNavigate } from "react-router-dom";
 
@@ -12,8 +16,18 @@ import {
 } from "@/components/ui/color-mode";
 
 const Navbar = () => {
-  const { toggleColorMode } = useColorMode();
-  const bg = useColorModeValue("gray.600", "gray.300");
+  // const bg = useColorModeValue("gray.600", "gray.300");
+
+  const Demo = () => {
+    const { toggleColorMode, colorMode } = useColorMode();
+    return (
+      <ClientOnly fallback={<Skeleton boxSize="8" />}>
+        <IconButton onClick={toggleColorMode} variant="outline" size="sm">
+          {colorMode === "light" ? <LuSun /> : <LuMoon />}
+        </IconButton>
+      </ClientOnly>
+    );
+  };
 
   return (
     <header className="header">
