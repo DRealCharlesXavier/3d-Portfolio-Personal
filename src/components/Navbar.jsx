@@ -1,41 +1,36 @@
 "use client";
 import React from "react";
 
-import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react";
-import { useColorMode } from "@/components/ui/color-mode";
+import { IconButton, Skeleton } from "@chakra-ui/react";
 import { LuMoon, LuSun } from "react-icons/lu";
 
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import {
-  ColorModeButton,
-  DarkMode,
-  LightMode,
-  useColorMode,
-  useColorModeValue,
-} from "@/components/ui/color-mode";
+import { useColorMode } from "@chakra-ui/react";
 
 const Navbar = () => {
-  // const bg = useColorModeValue("gray.600", "gray.300");
+  const { toggleColorMode, colorMode } = useColorMode();
 
-  const Demo = () => {
-    const { toggleColorMode, colorMode } = useColorMode();
+  const ColorModeToggle = () => {
     return (
-      <ClientOnly fallback={<Skeleton boxSize="8" />}>
-        <IconButton onClick={toggleColorMode} variant="outline" size="sm">
-          {colorMode === "light" ? <LuSun /> : <LuMoon />}
-        </IconButton>
-      </ClientOnly>
+      <IconButton
+        onClick={toggleColorMode}
+        variant="outline"
+        size="sm"
+        aria-label="Toggle color mode"
+        icon={colorMode === "light" ? <LuMoon /> : <LuSun />}
+      />
     );
   };
+
+  const bgColor = colorMode === "light" ? "bg-white" : "bg-gray-800";
+  const textColor = colorMode === "light" ? "text-black" : "text-white";
 
   return (
     <header className="header">
       <NavLink
         to="/"
-        className={`w-10 h-10 rounded-lg items-center justify-center flex font-bold shadow-md ${
-          useColorMode === "light" ? "bg-white" : "bg-gray-800"
-        }`}
+        className={`w-10 h-10 rounded-lg items-center justify-center flex font-bold shadow-md ${bgColor}`}
       >
         <p className="blue-gradient_text">XC</p>
       </NavLink>
@@ -56,6 +51,7 @@ const Navbar = () => {
         >
           Projects
         </NavLink>
+        <ColorModeToggle />
       </nav>
     </header>
   );
