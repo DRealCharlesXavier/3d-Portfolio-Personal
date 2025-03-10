@@ -3,8 +3,13 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Home, About, Projects, Contact } from "./pages"; 
 import Navbar from "./components/Navbar";
 
+import { Provider } from "./components/ui/provider";
+import { ChakraProvider } from "@chakra-ui/react"
+
 const App = () => {
   return (
+    <ChakraProvider>
+      <Provider>
     <main className="bg-slate-300/20 h-full">
       <Router>
         <Navbar />
@@ -16,6 +21,8 @@ const App = () => {
         </Routes>
       </Router>
     </main>
+      </Provider>
+    </ChakraProvider>
   ); 
 };
 
