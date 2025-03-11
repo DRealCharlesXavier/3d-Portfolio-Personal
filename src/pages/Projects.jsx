@@ -3,8 +3,12 @@ import { projects } from "../constants";
 import { arrow } from "../assets/icons";
 
 import CTA from "../components/CTA";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 const Projects = () => {
+  const bgColor = useColorModeValue("bg-white", "bg-gray-800"); // Theme-aware background
+  const textColor = useColorModeValue("text-slate-500", "text-slate-300"); // Theme-aware text
+  const headingColor = useColorModeValue("text-black", "text-white"); // Theme-aware headings
   return (
     <section className="max-container">
       <h1 className="head-text">

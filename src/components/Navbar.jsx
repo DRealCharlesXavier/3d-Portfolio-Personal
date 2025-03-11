@@ -2,17 +2,16 @@
 import React from "react";
 
 import { IconButton } from "@chakra-ui/react";
-import { LuMoon, LuSun } from "react-icons/lu";
 
 import { NavLink } from "react-router-dom";
 
-import { useColorMode } from "@/components/ui/color-mode";
+import { useColorMode, useColorModeValue } from "@/components/ui/color-mode";
 
 const Navbar = () => {
   const { toggleColorMode, colorMode } = useColorMode();
 
-  const bgColor = colorMode === "light" ? "bg-white" : "bg-gray-800";
-  const textColor = colorMode === "light" ? "text-black" : "text-white";
+  const bgColor = useColorModeValue("bg-white", "bg-gray-800");
+  const textColor = useColorModeValue("text-black", "text-white");
 
   return (
     <header className={`header ${bgColor} ${textColor}`}>

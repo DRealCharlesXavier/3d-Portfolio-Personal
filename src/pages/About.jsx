@@ -6,18 +6,23 @@ import "react-vertical-timeline-component/style.min.css";
 
 import { skills, experiences } from "../constants";
 import CTA from "../components/CTA";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 const About = () => {
+  const bgColor = useColorModeValue("bg-white", "bg-gray-800"); // Theme-aware background
+  const textColor = useColorModeValue("text-slate-500", "text-slate-300"); // Theme-aware text
+  const headingColor = useColorModeValue("text-black", "text-white"); // Theme-aware headings
+
   return (
-    <section className="max-container">
-      <h1 className="head-text">
+    <section className={`max-container ${bgColor}`}>
+      <h1 className={`head-text ${headingColor}`}>
         Hello, I'm{" "}
         <span className="blue-gradient_text font-semibold drop-shadow">
           Xavier
         </span>
       </h1>
 
-      <div className="mt-5 flex flex-col gap-3 text-slate-500">
+      <div className={`mt-5 flex flex-col gap-3 ${textColor}`}>
         <p>
           Software Engineer based in Nigeria, specialising in building
           applications, and is dedicated to creating and scaling cutting-edge
@@ -27,7 +32,7 @@ const About = () => {
       </div>
 
       <div className="py-10 flex flex-col">
-        <h3 className="subhead-text">My Skills</h3>
+        <h3 className={`subhead-text ${headingColor}`}>My Skills</h3>
 
         <div className="mt-16 flex flex-wrap gap-12">
           {skills.map((skill) => (
@@ -46,8 +51,8 @@ const About = () => {
       </div>
 
       <div className="py-16">
-        <h3 className="subhead-text">Work Experience</h3>
-        <div className="mt-5 flex flex-col gap-3 text-slate-500">
+        <h3 className={`subhead-text ${headingColor}`}>Work Experience</h3>
+        <div className={`mt-5 flex flex-col gap-3 ${textColor}`}>
           I've worked with all sorts of companies, leveling up my skills and
           teaming up with smart people. Here's the rundown:
         </div>
@@ -69,6 +74,7 @@ const About = () => {
                 }
                 iconStyle={{ background: experience.iconBg }}
                 contentStyle={{
+                  background: useColorModeValue("white", "gray.800"), // Theme-aware background
                   borderBottom: "8px",
                   borderStyle: "solid",
                   borderBottomColor: experience.iconBg,
@@ -76,11 +82,13 @@ const About = () => {
                 }}
               >
                 <div>
-                  <h3 className="text-black text-xl font-poppins font-semibold">
+                  <h3
+                    className={`text-xl font-poppins font-semibold ${headingColor}`}
+                  >
                     {experience.title}
                   </h3>
                   <p
-                    className="text-black-500 font-medium font-base"
+                    className={`${textColor} font-medium font-base`}
                     style={{ margin: 0 }}
                   >
                     {experience.company_name}
@@ -91,7 +99,7 @@ const About = () => {
                   {experience.points.map((point, index) => (
                     <li
                       key={`experience-point-${index}`}
-                      className="text-black-500/50 font-normal pl-1 text-sm"
+                      className={`${textColor} font-normal pl-1 text-sm`}
                     >
                       {point}
                     </li>
@@ -103,7 +111,9 @@ const About = () => {
         </div>
       </div>
 
-      <hr className="border-slate-200" />
+      <hr
+        className={useColorModeValue("border-slate-200", "border-slate-700")}
+      />
 
       <CTA />
     </section>

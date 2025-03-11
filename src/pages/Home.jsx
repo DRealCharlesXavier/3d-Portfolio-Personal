@@ -6,6 +6,7 @@ import Sky from "../models/Sky";
 import Bird from "../models/Bird";
 import Plane from "../models/Plane";
 import Homeinfo from "../components/HomeInfo";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 import sakura from "../assets/sakura.mp3";
 import { soundoff, soundon } from "../assets/icons";
@@ -61,14 +62,16 @@ const Home = () => {
 
   const [planeScale, planePosition] = adjustPlaneForScreenSize();
 
+  const bgColor = useColorModeValue("bg-gray-100", ("bg-gray-900"));
+
   return (
-    <section className="w-full h-screen relative">
+    <section className={`w-full h-screen relative ${bgColor}`}>
       <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
         {currentStage && <Homeinfo currentStage={currentStage} />}
       </div>
 
       <Canvas
-        className={`w-full h-screen bg-transparent ${
+        className={`w-full h-screen ${
           isRotating ? "cursor-grabbing" : "cursor-grab"
         }`}
         camera={{ near: 0.1, far: 1000 }}
@@ -77,8 +80,8 @@ const Home = () => {
           <directionalLight position={[1, 1, 1]} intensity={1} />
           <ambientLight intensity={0.5} />
           <hemisphereLight
-            skyColor="#b1e1ff"
-            groundColor="#000000"
+            skyColor={useColorModeValue("#b1e1ff", "#1e3a8a")} // Light blue vs dark blue
+            groundColor={useColorModeValue("#d4d4d4", "#000000")} // Light gray vs black
             intensity={1}
           />
 
