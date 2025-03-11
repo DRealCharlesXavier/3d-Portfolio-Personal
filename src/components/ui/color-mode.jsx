@@ -1,9 +1,5 @@
-import {
-  ClientOnly,
-  IconButton,
-  Skeleton,
-  useColorMode as useChakraColorMode,
-} from "@chakra-ui/react";
+import { ClientOnly, IconButton, Skeleton, useColorMode as useChakraColorMode, } from "@chakra-ui/react";
+
 import { ThemeProvider, useTheme } from "next-themes";
 
 import * as React from "react";
