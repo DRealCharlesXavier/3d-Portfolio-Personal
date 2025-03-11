@@ -10,8 +10,8 @@ const Projects = () => {
   const textColor = useColorModeValue("text-slate-500", "text-slate-300"); // Theme-aware text
   const headingColor = useColorModeValue("text-black", "text-white"); // Theme-aware headings
   return (
-    <section className="max-container">
-      <h1 className="head-text">
+    <section className={`max-container ${bgColor}`}>
+      <h1 className={`head-text ${headingColor}`}>
         My
         <span className="blue-gradient_text font-semibold drop-shadow">
           Projects
@@ -19,7 +19,7 @@ const Projects = () => {
       </h1>
 
       <div>
-        <p className="mt-5 flex flex-col gap-3 text-slate-500">
+        <p className={`mt-5 flex flex-col gap-3 ${textColor}`}>
           I've embarked on numerous projects throughout the years, but these are
           the ones I hold closest to my heart. Many of them are open source, so
           if you come across something that piques your interest, feel free to
@@ -43,10 +43,12 @@ const Projects = () => {
             </div>
 
             <div className="mt-5 flex flex-col">
-              <h4 className="text-2xl font-poppins font-semibold">
+              <h4
+                className={`text-2xl font-poppins font-semibold ${headingColor}`}
+              >
                 {project.name}
               </h4>
-              <p className="mt-2 text-slate-500">{project.description}</p>
+              <p className={`mt-2 ${textColor}`}>{project.description}</p>
               <div className="mt-5 flex items-center gap-2 font-poppins">
                 <Link
                   to={project.link}
@@ -67,7 +69,9 @@ const Projects = () => {
         ))}
       </div>
 
-      <hr className="border-slate-200" />
+      <hr
+        className={useColorModeValue("border-slate-200", "border-slate-700")}
+      />
 
       <CTA />
     </section>

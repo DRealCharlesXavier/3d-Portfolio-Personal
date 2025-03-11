@@ -2,6 +2,7 @@
 import React from "react";
 
 import { IconButton } from "@chakra-ui/react";
+import { LuMoon, LuSun } from "react-icons/lu";
 
 import { NavLink } from "react-router-dom";
 

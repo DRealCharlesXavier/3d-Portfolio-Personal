@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 
 import Fox from "../models/Fox";
@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 import { Canvas } from "@react-three/fiber";
 import useAlert from "../hooks/useAlert";
 import Alert from "../components/Alert";
+import { useColorModeValue } from "@/components/ui/color-mode";
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -14,6 +15,12 @@ const Contact = () => {
   const [currentAnimation, setCurrentAnimation] = useState("idle");
 
   const { alert, showAlert, hideAlert } = useAlert();
+
+  const bgColor = useColorModeValue("bg-white", "bg-gray-800"); // Theme-aware background
+  const textColor = useColorModeValue("text-black-500", "text-gray-300"); // Theme-aware text
+  const headingColor = useColorModeValue("text-black", "text-white"); // Theme-aware headings
+  const inputBg = useColorModeValue("bg-gray-100", "bg-gray-700"); // Theme-aware input background
+  const inputText = useColorModeValue("text-black", "text-white"); // Theme-aware input text
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -66,22 +73,24 @@ const Contact = () => {
   const handleBlur = () => setCurrentAnimation("idle");
 
   return (
-    <section className="relative flex lg:flex-row flex-col max-container h-[100vh]">
+    <section
+      className={`relative flex lg:flex-row flex-col max-container h-[100vh] ${bgColor}`}
+    >
       {alert.show && <Alert {...alert} />}
 
       <div className="flex-1 min-w-[50%] flex flex-col">
-        <h1 className="head-text">Get in Touch</h1>
+        <h1 className={`head-text ${headingColor}`}>Get in Touch</h1>
 
         <form
           className="w-full flex flex-col gap-7mt-14"
           onSubmit={handleSubmit}
         >
-          <label className="text-black-500 font-semibold">
+          <label className={`${textColor} font-semibold`}>
             Name
             <input
               type="text"
               name="name"
-              className="input"
+              className={`input ${inputBg} ${inputText}`}
               placeholder="John Doe"
               required
               value={form.name}
@@ -90,13 +99,13 @@ const Contact = () => {
               onBlur={handleBlur}
             />
           </label>
-          <label className="text-black-500 font-semibold">
+          <label className={`${textColor} font-semibold`}>
             Email
             <input
               type="email"
               name="email"
-              className="input"
-              placeholder="John@gmail.com"
+              className={`input ${inputBg} ${inputText}`}
+              placeholder="Johndoe@gmail.com"
               required
               value={form.email}
               onChange={handleChange}
@@ -104,12 +113,12 @@ const Contact = () => {
               onBlur={handleBlur}
             />
           </label>
-          <label className="text-black-500 font-semibold">
+          <label className={`${textColor} font-semibold`}>
             Your Message
             <textarea
               name="message"
               rows={4}
-              className="textarea"
+              className={`textarea ${inputBg} ${inputText}`}
               placeholder="Let me know how I can help you"
               required
               value={form.message}
