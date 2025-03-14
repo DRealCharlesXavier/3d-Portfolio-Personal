@@ -11,4 +11,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  server: {
+    host: "localhost", // Explicitly set to localhost
+    port: 5173, // Default port, kept for consistency
+    hmr: {
+      protocol: "ws", // Force WebSocket (default, but explicit)
+      host: "localhost",
+      port: 5173, // Match server port
+    },
+  },
 });

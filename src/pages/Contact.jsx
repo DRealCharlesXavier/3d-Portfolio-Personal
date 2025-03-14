@@ -1,6 +1,14 @@
 import { Suspense, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-
+import {
+  Box,
+  Heading,
+  Text,
+  Input,
+  Textarea,
+  Button,
+  Flex,
+} from "@chakra-ui/react";
 import Fox from "../models/Fox";
 import Loader from "../components/Loader";
 import { Canvas } from "@react-three/fiber";
@@ -13,14 +21,10 @@ const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [currentAnimation, setCurrentAnimation] = useState("idle");
-
   const { alert, showAlert, hideAlert } = useAlert();
 
-  const bgColor = useColorModeValue("bg-white", "bg-gray-800"); // Theme-aware background
-  const textColor = useColorModeValue("text-black-500", "text-gray-300"); // Theme-aware text
-  const headingColor = useColorModeValue("text-black", "text-white"); // Theme-aware headings
-  const inputBg = useColorModeValue("bg-gray-100", "bg-gray-700"); // Theme-aware input background
-  const inputText = useColorModeValue("text-black", "text-white"); // Theme-aware input text
+  const bgColor = useColorModeValue("bg-white", "bg-gray-800");
+  const textColor = useColorModeValue("text-gray-500", "text-gray-300");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -50,12 +54,11 @@ const Contact = () => {
           text: "Message sent successfully!",
           type: "success",
         });
-
         setTimeout(() => {
           hideAlert();
           setCurrentAnimation("idle");
           setForm({ name: "", email: "", message: "" });
-        }, [3000]);
+        }, 3000);
       })
       .catch((error) => {
         setIsLoading(false);
@@ -63,7 +66,7 @@ const Contact = () => {
         console.log(error);
         showAlert({
           show: true,
-          text: "I didn't recieve your message",
+          text: "I didn't receive your message",
           type: "danger",
         });
       });
@@ -73,24 +76,28 @@ const Contact = () => {
   const handleBlur = () => setCurrentAnimation("idle");
 
   return (
-    <section
-      className={`relative flex lg:flex-row flex-col max-container h-[100vh] ${bgColor}`}
+    <Box
+      as="section"
+      className={`max-container lg:flex flex-col lg:flex-row ${bgColor} h-screen`}
     >
       {alert.show && <Alert {...alert} />}
 
-      <div className="flex-1 min-w-[50%] flex flex-col">
-        <h1 className={`head-text ${headingColor}`}>Get in Touch</h1>
+      <Box className="flex-1 min-w-[50%] flex flex-col">
+        <Heading as="h1" className="head-text">
+          Get in Touch
+        </Heading>
 
-        <form
-          className="w-full flex flex-col gap-7mt-14"
+        <Box
+          as="form"
+          className="w-full flex flex-col gap-7 mt-14"
           onSubmit={handleSubmit}
         >
-          <label className={`${textColor} font-semibold`}>
-            Name
-            <input
+          <Box>
+            <Text className={`font-semibold ${textColor}`}>Name</Text>
+            <Input
               type="text"
               name="name"
-              className={`input ${inputBg} ${inputText}`}
+              className="input"
               placeholder="John Doe"
               required
               value={form.name}
@@ -98,13 +105,13 @@ const Contact = () => {
               onFocus={handleFocus}
               onBlur={handleBlur}
             />
-          </label>
-          <label className={`${textColor} font-semibold`}>
-            Email
-            <input
+          </Box>
+          <Box>
+            <Text className={`font-semibold ${textColor}`}>Email</Text>
+            <Input
               type="email"
               name="email"
-              className={`input ${inputBg} ${inputText}`}
+              className="input"
               placeholder="Johndoe@gmail.com"
               required
               value={form.email}
@@ -112,13 +119,13 @@ const Contact = () => {
               onFocus={handleFocus}
               onBlur={handleBlur}
             />
-          </label>
-          <label className={`${textColor} font-semibold`}>
-            Your Message
-            <textarea
+          </Box>
+          <Box>
+            <Text className={`font-semibold ${textColor}`}>Your Message</Text>
+            <Textarea
               name="message"
+              className="textarea"
               rows={4}
-              className={`textarea ${inputBg} ${inputText}`}
               placeholder="Let me know how I can help you"
               required
               value={form.message}
@@ -126,30 +133,24 @@ const Contact = () => {
               onFocus={handleFocus}
               onBlur={handleBlur}
             />
-          </label>
-          <button
+          </Box>
+          <Button
             type="submit"
             className="btn"
-            disabled={isLoading}
+            isLoading={isLoading}
             onFocus={handleFocus}
             onBlur={handleBlur}
           >
             {isLoading ? "Sending..." : "Send Message"}
-          </button>
-        </form>
-      </div>
-      <div className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
-        <Canvas
-          camera={{
-            position: [0, 0, 5],
-            fov: 75,
-            near: 0.1,
-            far: 1000,
-          }}
-        >
+          </Button>
+        </Box>
+      </Box>
+
+      <Box className="lg:w-1/2 w-full lg:h-auto md:h-[550px] h-[350px]">
+        <Canvas camera={{ position: [0, 0, 5], fov: 75, near: 0.1, far: 1000 }}>
           <directionalLight intensity={2.5} position={[0, 0, 1]} />
           <ambientLight intensity={0.5} />
-          <Suspense fallback={Loader}>
+          <Suspense fallback={<Loader />}>
             <Fox
               currentAnimation={currentAnimation}
               position={[0.5, 0.35, 0]}
@@ -158,8 +159,8 @@ const Contact = () => {
             />
           </Suspense>
         </Canvas>
-      </div>
-    </section>
+      </Box>
+    </Box>
   );
 };
 

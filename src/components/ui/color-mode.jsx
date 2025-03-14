@@ -1,7 +1,6 @@
-import { ClientOnly, IconButton, Skeleton, useColorMode as useChakraColorMode, } from "@chakra-ui/react";
-
+import { ClientOnly, IconButton, Skeleton } from "@chakra-ui/react";
+import { useColorMode as useChakraColorMode } from "@chakra-ui/react";
 import { ThemeProvider, useTheme } from "next-themes";
-
 import * as React from "react";
 import { LuMoon, LuSun } from "react-icons/lu";
 
@@ -17,7 +16,6 @@ export function useColorMode() {
   const { resolvedTheme, setTheme } = useTheme();
   const { setColorMode } = useChakraColorMode();
 
-  // Sync next-themes with Chakra
   React.useEffect(() => {
     setColorMode(resolvedTheme || "light");
   }, [resolvedTheme, setColorMode]);
@@ -55,16 +53,10 @@ export const ColorModeButton = React.forwardRef(function ColorModeButton(
         aria-label="Toggle color mode"
         size="sm"
         ref={ref}
+        className="hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        icon={<ColorModeIcon />}
         {...props}
-        css={{
-          _icon: {
-            width: "5",
-            height: "5",
-          },
-        }}
-      >
-        <ColorModeIcon />
-      </IconButton>
+      />
     </ClientOnly>
   );
 });

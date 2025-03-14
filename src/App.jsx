@@ -1,16 +1,19 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
+import { Box } from "@chakra-ui/react";
 import { Home, About, Projects, Contact } from "./pages";
 import Navbar from "./components/Navbar";
 import { useColorModeValue } from "./components/ui/color-mode";
+import Test from "./components/ui/test";
 
 const App = () => {
-  const bgColor = useColorModeValue("bg-slate-300/20", "bg-gray-900/80"); // Theme-aware background
+  const bgColor = useColorModeValue("gray.100", "gray.900"); // Theme-aware background
 
   return (
-    <main className={`${bgColor} h-full`}>
+    <Box bg={bgColor} h="full">
       <Router>
         <Navbar />
+        <Test />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -18,7 +21,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Router>
-    </main>
+    </Box>
   );
 };
 

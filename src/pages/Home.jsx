@@ -1,13 +1,13 @@
 import { Suspense, useState, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
+import { Box } from "@chakra-ui/react";
 import Loader from "../components/Loader";
 import Island from "../models/Island";
 import Sky from "../models/Sky";
 import Bird from "../models/Bird";
 import Plane from "../models/Plane";
-import Homeinfo from "../components/HomeInfo";
+import HomeInfo from "../components/HomeInfo";
 import { useColorModeValue } from "@/components/ui/color-mode";
-
 import sakura from "../assets/sakura.mp3";
 import { soundoff, soundon } from "../assets/icons";
 
@@ -23,7 +23,6 @@ const Home = () => {
     if (isPlayingMusic) {
       audioRef.current.play();
     }
-
     return () => {
       audioRef.current.pause();
     };
@@ -33,19 +32,16 @@ const Home = () => {
     let screenScale = null;
     let screenPosition = [0, -6.5, -43];
     let rotation = [0.1, 4.7, 0];
-
     if (window.innerWidth < 768) {
       screenScale = [0.9, 0.9, 0.9];
     } else {
       screenScale = [1, 1, 1];
     }
-
     return [screenScale, screenPosition, rotation];
   };
 
   const adjustPlaneForScreenSize = () => {
     let screenScale, screenPosition;
-
     if (window.innerWidth < 768) {
       screenScale = [1.5, 1.5, 1.5];
       screenPosition = [0, -1.5, 0];
@@ -53,22 +49,20 @@ const Home = () => {
       screenScale = [3, 3, 3];
       screenPosition = [0, -4, -4];
     }
-
     return [screenScale, screenPosition];
   };
 
   const [islandScale, islandPosition, islandRotation] =
     adjustIslandForScreenSize();
-
   const [planeScale, planePosition] = adjustPlaneForScreenSize();
 
-  const bgColor = useColorModeValue("bg-gray-100", ("bg-gray-900"));
+  const bgColor = useColorModeValue("bg-gray-100", "bg-gray-900");
 
   return (
-    <section className={`w-full h-screen relative ${bgColor}`}>
-      <div className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
-        {currentStage && <Homeinfo currentStage={currentStage} />}
-      </div>
+    <Box as="section" className={`w-full h-screen relative ${bgColor}`}>
+      <Box className="absolute top-28 left-0 right-0 z-10 flex items-center justify-center">
+        {currentStage && <HomeInfo currentStage={currentStage} />}
+      </Box>
 
       <Canvas
         className={`w-full h-screen ${
@@ -80,11 +74,10 @@ const Home = () => {
           <directionalLight position={[1, 1, 1]} intensity={1} />
           <ambientLight intensity={0.5} />
           <hemisphereLight
-            skyColor={useColorModeValue("#b1e1ff", "#1e3a8a")} // Light blue vs dark blue
-            groundColor={useColorModeValue("#d4d4d4", "#000000")} // Light gray vs black
+            color={useColorModeValue("#b1e1ff", "#1e3a8a")}
+            groundColor={useColorModeValue("#d4d4d4", "#000000")}
             intensity={1}
           />
-
           <Bird />
           <Sky isRotating={isRotating} />
           <Island
@@ -104,15 +97,15 @@ const Home = () => {
         </Suspense>
       </Canvas>
 
-      <div className="absolute bottom-2 left-2">
-        <img
+      <Box className="absolute bottom-2 left-2">
+        <Image
           src={!isPlayingMusic ? soundoff : soundon}
           alt="sound"
           className="w-10 h-10 cursor-pointer object-contain"
           onClick={() => setIsPlayingMusic(!isPlayingMusic)}
         />
-      </div>
-    </section>
+      </Box>
+    </Box>
   );
 };
 

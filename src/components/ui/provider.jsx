@@ -4,7 +4,9 @@ import { ColorModeProvider } from "./color-mode";
 export function Provider({ children }) {
   return (
     <ChakraProvider>
-      <ColorModeProvider>{children}</ColorModeProvider>
+      <ColorModeProvider>
+        {children}
+      </ColorModeProvider>
     </ChakraProvider>
   );
 }
